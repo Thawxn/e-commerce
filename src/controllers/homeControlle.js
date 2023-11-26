@@ -1,3 +1,4 @@
 exports.index = (req, res) => {
-  res.send('Hello Word');
+  console.log(req.userId);
+  res.json({ ok: true });
 };
