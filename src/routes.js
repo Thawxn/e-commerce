@@ -6,14 +6,20 @@ const routes = express.Router();
 const middleware = require('./middlewares/middleware');
 
 // importando controllers
-const homeController = require('./controllers/homeControlle');
-const authController = require('./controllers/authController');
+const adminController = require('./controllers/adminControlle');
+const userController = require('./controllers/userController');
+const sessionController = require('./controllers/sessionController');
 
-// home
-routes.get('/', middleware.auth, homeController.index);
+// admin
+routes.get('/find/:id', middleware.auth_admin, adminController.search); // buscando usuário pelo id
+routes.get('/find', middleware.auth_admin, adminController.search_all); // buscando todos os usuários
+routes.get('/stats', middleware.auth_admin, adminController.statistic_user); // estatística de usuários por mês
 
 // user
-routes.post('/register', authController.register);
-routes.post('/authenticate', authController.authenticate);
+routes.post('/register', userController.register); // registrando usuário
+routes.post('/edit', middleware.auth, userController.edit); // editando usuário
+
+// session
+routes.post('/authenticate', sessionController.authenticate); // logando
 
 module.exports = routes;
