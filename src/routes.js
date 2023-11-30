@@ -28,6 +28,8 @@ routes.post('/user/edit', middleware.auth, userController.edit); // editando usu
 
 // session
 routes.post('/session', sessionController.authenticate); // logando
+routes.post('/forgout_password', sessionController.forgout_password); // enviando token para redefinir senha
+routes.post('/reset_password', sessionController.reset_password); // redefinindo nova senha
 
 // product
 routes.post(
@@ -51,7 +53,7 @@ routes.get('/cart/find/:userId', middleware.auth, cartController.search_user);
 routes.get('/cart/find', middleware.auth_admin, cartController.search_admin);
 
 // order
-routes.post('/order/register', orderController.register);
+routes.post('/order/register', orderController.register); // registrando pedido
 routes.post('/order/edit/:id', middleware.auth_admin, orderController.edit);
 routes.delete(
   '/order/delete/:id',
@@ -60,6 +62,6 @@ routes.delete(
 );
 routes.get('/order/find/:userId', middleware.auth, orderController.search_user);
 routes.get('/order/find', middleware.auth_admin, orderController.search_admin);
-routes.get('/order/income', middleware.auth_admin, orderController.income);
+routes.get('/order/income', middleware.auth_admin, orderController.income); // obtendo rendimento mensal
 
 module.exports = routes;
