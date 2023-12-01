@@ -2,9 +2,23 @@ const Product = require('../models/Product');
 
 // registrando produto
 exports.register = async (req, res) => {
-  const newProduct = new Product(req.body);
-
   try {
+    const { title, categories, size, color, price, desc_prod, tech_info } =
+      req.body;
+
+    const { file } = req;
+
+    const newProduct = new Product({
+      title,
+      img: file.path,
+      categories,
+      size,
+      color,
+      price,
+      desc_prod,
+      tech_info,
+    });
+
     const savedProduct = await newProduct.save();
 
     return res.status(200).json(savedProduct);

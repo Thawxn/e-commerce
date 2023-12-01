@@ -5,6 +5,9 @@ const routes = express.Router();
 // importando middlewares
 const middleware = require('./middlewares/middleware');
 
+// importando config
+const upload = require('./config/uploads');
+
 // importando controllers
 const adminController = require('./controllers/adminControlle');
 const userController = require('./controllers/userController');
@@ -34,6 +37,7 @@ routes.post('/reset_password', sessionController.reset_password); // redefinindo
 // product
 routes.post(
   '/products/register',
+  upload.single('img'),
   middleware.auth_admin,
   productController.register,
 ); // registrando produto
