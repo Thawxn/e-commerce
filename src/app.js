@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // importando rota da minha aplicação
 const routes = require('./routes');
@@ -30,5 +31,8 @@ app.use(express.json());
 
 // permitindo rotas
 app.use(routes);
+
+// cors
+app.use(cors);
 
 module.exports = app;
